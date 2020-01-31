@@ -27,8 +27,18 @@ class AMQPConnection implements IAMQPMessagingConnection {
       durable: true,
     });
 
+    await this._channel.assertExchange(MessagingConstants.WebbookExchangeName, 'topic', {
+      durable: true,
+    });
+
     await this._channel.assertQueue(
       MessagingConstants.ClientCreatedQueueName, {
+        durable: true,
+      },
+    );
+
+    await this._channel.assertQueue(
+      MessagingConstants.WebhookNotifyQueueName, {
         durable: true,
       },
     );
@@ -37,6 +47,12 @@ class AMQPConnection implements IAMQPMessagingConnection {
       MessagingConstants.ClientCreatedQueueName,
       MessagingConstants.ClientExchangeName,
       MessagingConstants.ClientCreatedRoutingKey,
+    );
+
+    await this._channel.bindQueue(
+      MessagingConstants.WebhookNotifyQueueName,
+      MessagingConstants.WebbookExchangeName,
+      MessagingConstants.WebhookNotifyRoutingKey,
     );
   }
 
