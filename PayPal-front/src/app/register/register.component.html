@@ -1,0 +1,12 @@
+<div style="display: flex;align-items: center;justify-content: center;margin-top: 10rem;">
+  <div style="display: flex; flex-direction: column; width: 45rem; height: max-content; background-color: lightgray;justify-content: center;padding: 3rem;">
+    <h3 style="border-bottom: 1px solid gray; padding: 1rem;"> Registraion:</h3>
+   <label>CLient ID:</label>
+   <input style="padding: .5rem;" [(ngModel)]="clientId">
+   <label style="margin-top: 1rem;">Secret:</label>
+   <input  style="padding: .5rem;" [(ngModel)]="secret">
+  
+    <button style="background-color: green; color: white; padding: 1rem; cursor: pointer;margin-top: 1rem;" (click)="register()">Submit</button>
+  
+  </div>
+</div>

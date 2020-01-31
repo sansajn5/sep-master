@@ -1,0 +1,7 @@
+<div style="display: flex; justify-content: center; flex-direction: column;align-items: center;">
+  <h1 *ngIf="mode === 'success'">Success!</h1>
+  <h1 *ngIf="mode === 'failed'">Failed!</h1>
+  <h1 *ngIf="mode === 'canceled'">Payment Canceled!</h1>
+  <img style="width: 10rem;height: 10rem;" *ngIf="mode === 'success'" src="../../assets/success.png">
+  <img style="width: 10rem;height: 10rem;" *ngIf="mode === 'failed' || mode === 'canceled'" src="../../assets/failure.png">
+</div>

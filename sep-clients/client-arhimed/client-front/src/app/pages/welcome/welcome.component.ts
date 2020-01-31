@@ -66,7 +66,7 @@ export class WelcomeComponent implements OnInit {
        // window.open('http://localhost:4100/payment?customerId=1&sellerId=' + this.clientId +'&vendorId=' + merchantId + '&productId=1&price=' + this.amount)
       }
       if (payment.name == 'BITCOIN') {
-        http://localhost:4200/payment?organizationId=51&customerId=3&merchantId=92aa3e6b-2594-11ea-b565-0242ac150005&productId=5&price_amount=0.003&price_currency=BTC&receive_currency=BTC
+       // http://localhost:4200/payment?organizationId=51&customerId=3&merchantId=92aa3e6b-2594-11ea-b565-0242ac150005&productId=5&price_amount=0.003&price_currency=BTC&receive_currency=BTC
         window.open('http://localhost:4300/payment?organizationId=' + merchantId +'&customerId='+ this.clientId + '&merchantId='+ merchantId +'&productId=5&price_amount=0.003&price_currency=BTC&receive_currency=BTC')
       }
       if (payment.name == 'SUBSCRIBE') {
