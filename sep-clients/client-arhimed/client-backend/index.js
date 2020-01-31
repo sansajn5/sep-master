@@ -66,6 +66,58 @@ app.post('/transaction', async (req, res, next) => {
     res.json(response);
 })
 
+app.post('/success', async (req, res, next) => {
+    const body = req.body;
+    console.log(body.referenceId)
+
+    const transaction = await Transaction.findById(body.referenceId);
+    console.log(transaction)
+    transaction.status = 'success';
+
+    Transaction.findById(transaction._id, (err, result) => {
+        if (err) {
+            return err;
+        } else {
+            Object.assign(result, transaction);
+            result.save((err, res) => {
+                if (err) {
+                    return err;
+                } else {
+                    return result;
+                }
+            });
+        }
+    })
+
+    res.json({});
+})
+
+app.post('/failed', async (req, res, next) => {
+    const body = req.body;
+    console.log(body.referenceId)
+    
+    const transaction = await Transaction.findById(body.referenceId);
+    console.log(transaction)
+    transaction.status = 'failed';
+
+    Transaction.findById(transaction._id, (err, result) => {
+        if (err) {
+            return err;
+        } else {
+            Object.assign(result, transaction);
+            result.save((err, res) => {
+                if (err) {
+                    return err;
+                } else {
+                    return result;
+                }
+            });
+        }
+    })
+
+    res.json({});
+})
+
 const getToken = async () => {
     const response = await axios.post('https://localhost:8000/api/client/auth/login', {
         merchantId,
