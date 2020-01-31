@@ -5,14 +5,18 @@ import ILogNotifer from "../ILogNotifier";
 import { IAMQPMessagingConnection } from "../../messaging";
 import { Constants, MessagingConstants } from "../../util";
 import { LogMessage } from "../../model";
+import { ILogger } from "../../util/logging";
 
 @injectable()
 class LogNotifier implements ILogNotifer {
 
     _amqpConnection: IAMQPMessagingConnection;
 
-    constructor(@inject(Constants.IAMQPMessagingConnection) amqpConnection: IAMQPMessagingConnection) {
+    _logger: ILogger
+
+    constructor(@inject(Constants.IAMQPMessagingConnection) amqpConnection: IAMQPMessagingConnection, @inject(Constants.ILogger) logger: ILogger) {
         this._amqpConnection = amqpConnection;
+        this._logger = logger;
     }
 
     public async fireLog(colerrationId: string, type: 'info' | 'error', description: string): Promise<void> {
@@ -25,6 +29,8 @@ class LogNotifier implements ILogNotifer {
             serviceName: 'Gateway',
             timestamp: moment().format('LLLL')
         }
+
+        this._logger.info(JSON.stringify(logMessage));
         
         channel.publish(
             MessagingConstants.LogExchangeName,

@@ -32,6 +32,8 @@ class LogNotifier implements ILogNotifier {
         
         type === 'info' && this._logger.info(JSON.stringify(logMessage));
 
+        this._logger.info(JSON.stringify(logMessage));
+
         channel.publish(
             MessagingConstants.LogExchangeName,
             MessagingConstants.LogCreatedRoutingKey,

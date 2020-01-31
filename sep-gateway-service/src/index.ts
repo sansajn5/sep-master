@@ -14,7 +14,6 @@ import { Constants } from './util';
 import { IProxy } from './util/communication';
 import { IAMQPMessagingConnection } from './messaging';
 import { ICacheClientService } from './cache';
-import { http } from 'winston';
 
 dotenvConfig();
 
@@ -82,9 +81,12 @@ const start = async (): Promise<void> => {
   });
 
   const port = process.env.GATEWAY_HTTP_PORT || 3000;
-  const server = https.createServer(opts, expressApp);
-  server.listen(port, () => {
-    logger.info(`External gateway is listening on port ${port}!`);
-  });
+  // const server = https.createServer(opts, expressApp);
+  // server.listen(port, () => {
+  //   logger.info(`External gateway is listening on port ${port}!`);
+  // });
+  expressApp.listen(port, () => {
+      logger.info(`External gateway is listening on port ${port}!`);
+    });
 }
 start();

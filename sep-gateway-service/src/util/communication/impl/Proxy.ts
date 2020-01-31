@@ -11,12 +11,10 @@ import {ILogNotifier} from '../../../service';
 @injectable()
 export default class Proxy extends BaseProxy implements IProxy {
 
-  _logger: ILogger;
   _logNotifier: ILogNotifier;
 
-  constructor(@inject(Constants.ILogger) logger: ILogger, @inject(Constants.ILogNotifer) logNotifer: ILogNotifier) {
+  constructor(@inject(Constants.ILogNotifer) logNotifer: ILogNotifier) {
     super();
-    this._logger = logger;
     this._logNotifier = logNotifer;
   }
 
@@ -30,18 +28,12 @@ export default class Proxy extends BaseProxy implements IProxy {
         headers: this.checkAndGetHeaders(req),
       });
 
-      this._logger.info(JSON.stringify({
-        timestamp: new Date(),
-        colerrationId: req.headers[Constants.RequestId],
-        target: url
-      }));
       // @ts-ignore
       this._logNotifier.fireLog(req.headers['ColerrationId'], 'info', 'start')
 
       return res.status(response.status).send(response.data);
     } catch (err) {
       if (!err.response) {
-        this._logger.error(err);
         return res.status(500).send('Internal server error');
       }
       return res.status(err.response.status).send(err.response.data);

@@ -17,9 +17,6 @@ class ClientRepository implements IClientRepository {
     }
 
     public getAll(): Promise<Client[]> {
-        // if (!this._db) {
-        //     this._db = this._dbConn.get();
-        // }
         const repo = this._db.getRepository(Client);
         return repo.find();
     }

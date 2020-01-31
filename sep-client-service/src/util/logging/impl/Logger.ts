@@ -1,5 +1,6 @@
 import { createLogger, format, Logger as WinstonLogger, transports } from 'winston';
 import { injectable } from 'inversify';
+import * as moment from 'moment';
 
 import { ILogger } from '..';
 
@@ -15,6 +16,7 @@ class Logger implements ILogger {
         new transports.Console({
           format: format.simple(),
         }),
+        new transports.File({ filename: `logs/${moment().format('L')}-logs.log`})
       ],
     });
   }

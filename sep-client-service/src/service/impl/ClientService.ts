@@ -2,7 +2,7 @@ import { injectable, inject } from "inversify";
 import { hashSync } from 'bcrypt';
 import { uuid } from 'uuidv4';
 
-import { IClientService } from "..";
+import { IClientService, IClientNotifier } from "..";
 import { IClientRepository, IPaymentMethodRepository } from "../../database";
 import { Constants } from "../../util";
 import { Client } from "../../entities";
@@ -14,9 +14,13 @@ class ClientService implements IClientService {
 
     _paymentMethodRepository: IPaymentMethodRepository;
 
-    constructor(@inject(Constants.IClientRepository) clientRepository: IClientRepository, @inject(Constants.IPaymentMethodRepository) paymentMethodRepository: IPaymentMethodRepository) {
+    _clientNotifier: IClientNotifier;
+
+    constructor(@inject(Constants.IClientRepository) clientRepository: IClientRepository, @inject(Constants.IPaymentMethodRepository) paymentMethodRepository: IPaymentMethodRepository
+    , @inject(Constants.IClientNotifier) clientNotifier: IClientNotifier) {
         this._clientRepository = clientRepository;
         this._paymentMethodRepository = paymentMethodRepository
+        this._clientNotifier = clientNotifier;
     }
     
     // TODO Method need refactor and move from hardcore should enable easier creating and matching
@@ -30,6 +34,9 @@ class ClientService implements IClientService {
         const password = uuid();
         client.secret = hashSync(password, parseInt(process.env.SALT_LENGTH));
         const savedClient = await this._clientRepository.getRepo().save(client);
+
+        this._clientNotifier.clientCreated(savedClient.id, savedClient.successUrl, savedClient.failedUrl);
+
         return Promise.resolve({...savedClient, password});
     }
 

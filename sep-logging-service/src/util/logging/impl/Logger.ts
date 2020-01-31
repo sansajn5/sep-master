@@ -16,7 +16,7 @@ class Logger implements ILogger {
         new transports.Console({
           format: format.simple(),
         }),
-        new transports.File({ filename: `${moment().format('L')}-logs.log`})
+        new transports.File({ filename: `logs/${moment().format('L')}-logs.log`})
       ],
     });
   }
