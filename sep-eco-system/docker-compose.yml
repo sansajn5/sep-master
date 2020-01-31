@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+
+  sep-redis:
+    image: redis
+    container_name: sep-redis
+    ports:
+      - "6379:6379"
+
+  sep-rabbitmq:
+    container_name: sep-rabbitmq
+    image: rabbitmq:management
+    # Default user/pass: guest/guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ./volumes/messaging/log:/var/log/rabbitmq
+      - ./volumes/messaging/lib:/var/lib/rabbitmq

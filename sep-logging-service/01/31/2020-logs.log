@@ -1,0 +1,27 @@
+{"message":"Logger Service is connected to rabbitmq!","level":"info"}
+{"message":"Logging Service is listening on port 3000!","level":"info"}
+{"message":"Service: [Service-Client] Request: [1e43a7eb-4c53-4a4e-8e2c-2dcacf38d0a4] Time: [Friday, January 31, 2020 6:27 PM] Type: [INFO] descrption: [Enter method POST /api/auth/login]","level":"info"}
+{"message":"Service: [Service-Gateway] Request: [1e43a7eb-4c53-4a4e-8e2c-2dcacf38d0a4] Time: [Friday, January 31, 2020 6:27 PM] Type: [INFO] descrption: [start]","level":"info"}
+{"message":"Service: [Service-Client] Request: [07c88b81-bdb6-43e4-9edb-4aa1a5f8511e] Time: [Friday, January 31, 2020 6:27 PM] Type: [INFO] descrption: [Enter method POST /api/auth/login]","level":"info"}
+{"message":"Service: [Service-Client] Request: [adaa63d2-6e90-4ce5-806b-5b8281636bd1] Time: [Friday, January 31, 2020 6:30 PM] Type: [INFO] descrption: [Enter method POST /api/auth/login]","level":"info"}
+{"message":"Service: [Service-Client] Request: [4c39d5fe-afdf-4e01-b3cf-1a7fdd89f73c] Time: [Friday, January 31, 2020 6:31 PM] Type: [INFO] descrption: [Enter method POST /api/auth/login]","level":"info"}
+{"message":"Service: [Service-Client] Request: [36d99cb1-c1f2-43c0-aa75-7081c5e1dc85] Time: [Friday, January 31, 2020 6:32 PM] Type: [INFO] descrption: [Enter method POST /api/auth/login]","level":"info"}
+{"message":"Service: [Service-Client] Request: [d942f560-efc4-47e3-b2ac-dfa33fa0d7a2] Time: [Friday, January 31, 2020 6:32 PM] Type: [INFO] descrption: [Enter method POST /api/auth/login]","level":"info"}
+{"message":"Service: [Service-Client] Request: [cc2d4ad9-2a83-463a-b6bd-f0b9c82bea30] Time: [Friday, January 31, 2020 6:35 PM] Type: [INFO] descrption: [Enter method POST /api/auth/login]","level":"info"}
+{"message":"Service: [Service-Gateway] Request: [cc2d4ad9-2a83-463a-b6bd-f0b9c82bea30] Time: [Friday, January 31, 2020 6:35 PM] Type: [INFO] descrption: [start]","level":"info"}
+{"message":"Service: [Service-Client] Request: [7c10a0a9-a00c-403a-9d0f-f0ffae7b0545] Time: [Friday, January 31, 2020 6:36 PM] Type: [INFO] descrption: [Enter method POST /api/auth/login]","level":"info"}
+{"message":"Service: [Service-Gateway] Request: [7c10a0a9-a00c-403a-9d0f-f0ffae7b0545] Time: [Friday, January 31, 2020 6:36 PM] Type: [INFO] descrption: [start]","level":"info"}
+{"message":"Service: [Service-Client] Request: [5f2a402e-199b-47d2-aafc-e16dd9ee5cad] Time: [Friday, January 31, 2020 6:37 PM] Type: [INFO] descrption: [Enter method POST /api/auth/login]","level":"info"}
+{"message":"Service: [Service-Gateway] Request: [5f2a402e-199b-47d2-aafc-e16dd9ee5cad] Time: [Friday, January 31, 2020 6:37 PM] Type: [INFO] descrption: [start]","level":"info"}
+{"message":"Service: [Service-Client] Request: [087d56a5-12fe-4808-8308-f8c420cf4092] Time: [Friday, January 31, 2020 6:37 PM] Type: [INFO] descrption: [Enter method POST /api/auth/login]","level":"info"}
+{"message":"Service: [Service-Gateway] Request: [087d56a5-12fe-4808-8308-f8c420cf4092] Time: [Friday, January 31, 2020 6:37 PM] Type: [INFO] descrption: [start]","level":"info"}
+{"message":"Service: [Service-Client] Request: [633c8b7a-b072-40d2-92a6-db44e5c6bfb4] Time: [Friday, January 31, 2020 6:37 PM] Type: [INFO] descrption: [Enter method /api/clients/:merchantId with undefined]","level":"info"}
+{"message":"Service: [Service-Gateway] Request: [633c8b7a-b072-40d2-92a6-db44e5c6bfb4] Time: [Friday, January 31, 2020 6:37 PM] Type: [INFO] descrption: [start]","level":"info"}
+{"message":"Service: [Service-Client] Request: [65afd39e-2e67-4c36-8819-2388198550f8] Time: [Friday, January 31, 2020 7:46 PM] Type: [INFO] descrption: [Enter method POST /api/auth/login]","level":"info"}
+{"message":"Service: [Service-Gateway] Request: [65afd39e-2e67-4c36-8819-2388198550f8] Time: [Friday, January 31, 2020 7:46 PM] Type: [INFO] descrption: [start]","level":"info"}
+{"message":"Service: [Service-Client] Request: [3d076c9f-295f-4593-911c-498019e7353b] Time: [Friday, January 31, 2020 7:46 PM] Type: [INFO] descrption: [Enter method /api/clients/:merchantId with undefined]","level":"info"}
+{"message":"Service: [Service-Gateway] Request: [3d076c9f-295f-4593-911c-498019e7353b] Time: [Friday, January 31, 2020 7:46 PM] Type: [INFO] descrption: [start]","level":"info"}
+{"message":"Service: [Service-Client] Request: [2041957b-6d4b-40be-b3ca-1c7e340c0540] Time: [Friday, January 31, 2020 8:27 PM] Type: [INFO] descrption: [Enter method POST /api/auth/login]","level":"info"}
+{"message":"Service: [Service-Gateway] Request: [2041957b-6d4b-40be-b3ca-1c7e340c0540] Time: [Friday, January 31, 2020 8:27 PM] Type: [INFO] descrption: [start]","level":"info"}
+{"message":"Service: [Service-Client] Request: [3a2a4bfa-1bae-4eb7-93b8-78d1f4f33ebf] Time: [Friday, January 31, 2020 8:27 PM] Type: [INFO] descrption: [Enter method /api/clients/:merchantId with undefined]","level":"info"}
+{"message":"Service: [Service-Gateway] Request: [3a2a4bfa-1bae-4eb7-93b8-78d1f4f33ebf] Time: [Friday, January 31, 2020 8:27 PM] Type: [INFO] descrption: [start]","level":"info"}
