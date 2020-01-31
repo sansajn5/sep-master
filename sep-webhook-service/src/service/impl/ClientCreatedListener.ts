@@ -6,7 +6,6 @@ import { ILogger } from "../../util/logging";
 import { IAMQPMessagingConnection } from "../../messaging";
 import { Constants, MessagingConstants } from "../../util";
 import { ClientCreatedMessage } from "../../model";
-import ClientService from "./ClientService";
 
 @injectable()
 class ClientCreatedListener implements IClientCreatedListener {
@@ -31,7 +30,7 @@ class ClientCreatedListener implements IClientCreatedListener {
             noAck: false
         })
 
-        this._logger.info('Webhook Service is connected to rabbitmq!');
+        this._logger.info('Webhook Service is connected to rabbitmq for created client!');
     }
 
     private async processMessage(msg: Message): Promise<any> {
