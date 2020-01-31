@@ -1,0 +1,9 @@
+.payment {
+    margin-top: 15%;
+    text-align: center;
+    &__methods {
+        > button {
+            margin: 0 2% 0 2%;
+        }
+    }
+}

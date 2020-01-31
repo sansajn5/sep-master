@@ -7,6 +7,7 @@ const Constants = {
   IDatabaseConnection: 'IDatabaseConnection',
   IClientRepository: 'IClientRepository',
   IClientService: 'IClientService',
+  IWebhookListener: 'IWebhookListener'
 };
 
 export default Constants;
