@@ -2,11 +2,11 @@ import { createConnection, Connection } from "typeorm";
 import { injectable } from "inversify";
 
 import { IDatabaseConnection } from "..";
-import { Client, ClientToPaymentMethod, PaymentMethod } from "../../entities";
+import { Client } from "../../entities";
 
 
 const entities = [
-    Client, ClientToPaymentMethod, PaymentMethod
+    Client
 ];
 
 @injectable()

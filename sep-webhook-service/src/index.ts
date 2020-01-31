@@ -9,16 +9,22 @@ import { ILogger } from './util/logging';
 import { Constants } from './util';
 import { IAMQPMessagingConnection } from './messaging';
 import { IApp } from './App';
+import { IDatabaseConnection } from './database';
 
 dotenvConfig();
 
 const start = async (): Promise<void> => {
-  const app: IApp = inversifyConfig.get(Constants.IApp);
+  
+  const db: IDatabaseConnection = inversifyConfig.get(Constants.IDatabaseConnection);
   const logger: ILogger = inversifyConfig.get(Constants.ILogger);
   const amqpConnection: IAMQPMessagingConnection = inversifyConfig.get(Constants.IAMQPMessagingConnection);
   
+  await db.setup();
   await amqpConnection.setup();
-  await app.listenLogCreated();
+  
+  const app: IApp = inversifyConfig.get(Constants.IApp);
+  
+  await app.listenClientCreated();
 
   const expressApp: express.Application = express();
   expressApp.use(json());
@@ -41,9 +47,9 @@ const start = async (): Promise<void> => {
     return res.status(200).json();
   });
   
-  const port = process.env.LOGGING_HTTP_PORT || 3000;
+  const port = process.env.WEBHOOK_HTTP_PORT || 3000;
   expressApp.listen(port, () => {
-    logger.info(`Logging Service is listening on port ${port}!`);
+    logger.info(`Webhook Service is listening on port ${port}!`);
   });
 }
 

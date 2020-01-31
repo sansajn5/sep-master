@@ -3,7 +3,10 @@ const Constants = {
   ILogger: 'ILogger',
   SepHeader: 'expecto-patronum',
   IAMQPMessagingConnection: 'IAMQPMessagingConnection',
-  ILogCreatedListner: 'ILogCreatedListener'
+  IClientCreatedListener: 'IClientCreatedListener',
+  IDatabaseConnection: 'IDatabaseConnection',
+  IClientRepository: 'IClientRepository',
+  IClientService: 'IClientService',
 };
 
 export default Constants;

@@ -1,4 +1,4 @@
-## SEP Logging Service
+## SEP Webhook Service
 
 ### Summary
 

@@ -1,20 +1,21 @@
 import { injectable, inject } from "inversify";
-import { ILogCreatedListener } from "./service";
+
+import { IClientCreatedListener } from "./service";
 import { Constants } from "./util";
 
 export interface IApp {
-    listenLogCreated(): Promise<void>;
+    listenClientCreated(): Promise<void>;
 }
 
 @injectable()
 export class App implements IApp {
-    _listenerService: ILogCreatedListener;
+    _listenerService: IClientCreatedListener;
 
-    constructor(@inject(Constants.ILogCreatedListner) listnerService: ILogCreatedListener) {
+    constructor(@inject(Constants.IClientCreatedListener) listnerService: IClientCreatedListener) {
         this._listenerService = listnerService;
     }
 
-    listenLogCreated(): Promise<void> {
+    listenClientCreated(): Promise<void> {
         return this._listenerService.listen();
     }
 }
