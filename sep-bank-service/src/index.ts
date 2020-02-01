@@ -76,6 +76,7 @@ const start = async (): Promise<void> => {
 
   expressApp.post('/api/payments/success', (req: express.Request, res: express.Response) => {
     serviceLogger.fireLog(req.header(Constants.RequestId), 'info', 'Enter method POST /api/payments/success');
+    console.log(req.body);
     const { merchantIdOrderId, status } = req.body;
     return app.updateTransaction(merchantIdOrderId, status).then((data) => {
       res.status(200).json(data)

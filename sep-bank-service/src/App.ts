@@ -38,10 +38,13 @@ export class App implements IApp {
     }    
 
     public prepareTransaction(merchantId: string, userId: string, referenceId: string, merchantIdOrderId: string, amount: string): Promise<any> {
+        console.log('ovo');
         return this._clientService.createTransaction(merchantId, userId, referenceId, merchantIdOrderId, amount);
     }
 
     public updateTransaction(merchantIdOrderId: string, status: string): Promise<any> {
+        console.log(merchantIdOrderId)
+        console.log('aaaa')
         return this.updateTransaction(merchantIdOrderId, status);
     }
 

@@ -35,7 +35,7 @@ class ClientService implements IClientService {
         const client = await this._clientRepository.getRepo().findOne({where: {vendorId: merchantId, userId: userId}});
 
         try {
-            const { data } = await Axios.post('http://localhost:8010', {
+            const { data } = await Axios.post('http://localhost:8010/api/create-payment-request', {
                 merchantId: userId,
                 merchantPassword: '123',
                 organizationId: '11',
@@ -64,7 +64,10 @@ class ClientService implements IClientService {
         
     }
     public async updateTransaction(referenceId: string, status: 'success' | 'failed') {
+        console.log(1)
+        console.log(referenceId)
         const transaction = await this._transactionRepository.getRepo().findOne({where: {referenceId: referenceId}});
+        (console.log(transaction))
         transaction.status = status;
         await this._transactionRepository.getRepo().save(transaction);
 

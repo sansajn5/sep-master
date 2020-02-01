@@ -113,28 +113,34 @@ const paymentExecute = async (body) => {
         console.log(transaction);
 
         let messageUrl = '';
-
+        let data = {
+            merchantIdOrderId: transaction.merchantIdOrderId,
+            status: ''
+        }
         switch (transaction.status) {
             case 'success':
                 messageUrl = transaction.successUrl;
+                data.status = 'success';
             break;
             case 'failed':
                 messageUrl = transaction.failedUrl;
+                data.status = 'failed';
             break;
             default:
                 messageUrl = transaction.errorUrl;
+                data.status = 'failed';
             break;
 
         }
+        
+        // const httpsAgent = new https.Agent({
+        //     rejectUnauthorized: false,
+        //     cert: fs.readFileSync("./centrala_cert.pem"),
+        //     key: fs.readFileSync("./centrala.pem"),
+        // })
 
-        const httpsAgent = new https.Agent({
-            rejectUnauthorized: false,
-            cert: fs.readFileSync("./centrala_cert.pem"),
-            key: fs.readFileSync("./centrala.pem"),
-        })
-
-     axios.post(messageUrl, data,
-        { headers: {}, params: {}, httpsAgent })
+     await axios.post(messageUrl, data,
+        { headers: {}, params: {} })
         .then(function (response) {
             console.log(response);
         })
@@ -281,33 +287,38 @@ const createAcquirerResponse = async (body) => {
         status: transaction.status
     }
 
-    let messageUrl = '';
-
-    switch (returnData.status) {
-        case 'success':
-            messageUrl = transaction.successUrl;
-        break;
-        case 'failed':
-            messageUrl = transaction.failedUrl;
-        break;
-        default:
-            messageUrl = transaction.errorUrl;
-        break;
-
-    }
-
     console.log('ENDE')
     console.log(returnData);
 
-    /*
-    axios.post(messageUrl, data,
-       { headers: {}, params: {} })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      }); */
+    let messageUrl = '';
+        let data = {
+            merchantIdOrderId: transaction.merchantIdOrderId,
+            status: ''
+        }
+        switch (transaction.status) {
+            case 'success':
+                messageUrl = transaction.successUrl;
+                data.status = 'success';
+            break;
+            case 'failed':
+                messageUrl = transaction.failedUrl;
+                data.status = 'failed';
+            break;
+            default:
+                messageUrl = transaction.errorUrl;
+                data.status = 'failed';
+            break;
+
+        }
+
+        await axios.post(messageUrl, data,
+            { headers: {}, params: {} })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
       result = returnData;
 
