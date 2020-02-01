@@ -27,7 +27,7 @@ const opts = {
 	]
 }
 
-const ANNONYMUS_ROUTES = ['/api/client/auth/register', '/api/client/auth/login', '/api/client/health'];
+const ANNONYMUS_ROUTES = ['/api/client/auth/register', '/api/client/auth/login', '/api/client/health', '/api/bank/payments/success', '/api/bank/payments/failed'];
 
 const start = async (): Promise<void> => {
   const logger: ILogger = inversifyConfig.get(Constants.ILogger);
@@ -56,12 +56,12 @@ const start = async (): Promise<void> => {
     if (req.url === '/health') return next();
     const authHeader = req.header(Constants.SepHeader);
 
-    if (!authHeader) {
-      return res.status(401).send();
-    }
-
     const cacheUser = await cacheService.getValue(`${Constants.SESSION_PREFIX}${authHeader}`);
     if (!cacheUser && !ANNONYMUS_ROUTES.some(route => req.url === route)) {
+      return res.status(401).send();  
+    }
+
+    if (!['/api/bank/payments/success', '/api/bank/payments/failed'].some(route => req.url === route) && !authHeader) {
       return res.status(401).send();  
     }
     
@@ -81,7 +81,7 @@ const start = async (): Promise<void> => {
   });
 
   const port = process.env.GATEWAY_HTTP_PORT || 3000;
-  // const server = https.createServer(opts, expressApp);
+  const server = https.createServer(opts, expressApp);
   // server.listen(port, () => {
   //   logger.info(`External gateway is listening on port ${port}!`);
   // });

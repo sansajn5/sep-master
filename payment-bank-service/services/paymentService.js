@@ -127,14 +127,20 @@ const paymentExecute = async (body) => {
 
         }
 
-    /* axios.post(messageUrl, data,
-        { headers: {}, params: {} })
+        const httpsAgent = new https.Agent({
+            rejectUnauthorized: false,
+            cert: fs.readFileSync("./centrala_cert.pem"),
+            key: fs.readFileSync("./centrala.pem"),
+        })
+
+     axios.post(messageUrl, data,
+        { headers: {}, params: {}, httpsAgent })
         .then(function (response) {
             console.log(response);
         })
         .catch(function (error) {
             console.log(error);
-        }); */
+        });
 
         result = transaction;
 
