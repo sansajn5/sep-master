@@ -30,6 +30,22 @@ class AMQPConnection implements IAMQPMessagingConnection {
     await this._channel.assertExchange(MessagingConstants.WebbookExchangeName, 'topic', {
       durable: true,
     });
+
+    await this._channel.assertExchange(MessagingConstants.CleanupExchangeName, 'topic', {
+      durable: true,
+    });
+
+    await this._channel.assertQueue(
+      MessagingConstants.CleanupStartQueueName, {
+        durable: true,
+      },
+    );
+
+    await this._channel.bindQueue(
+      MessagingConstants.CleanupStartQueueName,
+      MessagingConstants.CleanupExchangeName,
+      MessagingConstants.CleanUpRoutingKey,
+    );
   }
 
   public getChannel(): Channel {

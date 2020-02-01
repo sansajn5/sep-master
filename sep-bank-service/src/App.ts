@@ -1,5 +1,5 @@
 import { injectable, inject } from "inversify";
-import { IClientService } from "./service";
+import { IClientService, ICleanupListener } from "./service";
 import { Constants } from "./util";
 
 export interface CreateClientRequest {
@@ -17,6 +17,8 @@ export interface IApp {
     prepareTransaction(merchantId: string, userId: string, referenceId: string, merchantIdOrderId: string, amount: string): Promise<any>;
 
     updateTransaction(merchantIdOrderId: string, status: string): Promise<any>;
+
+    listenCleanup(): Promise<void>;
 }
 
 @injectable()
@@ -24,8 +26,11 @@ export class App implements IApp {
 
     _clientService: IClientService;
 
-    constructor(@inject(Constants.IClientService) clientService) {
+    _cleanupListener: ICleanupListener;
+
+    constructor(@inject(Constants.IClientService) clientService, @inject(Constants.ICleanupListener) cleanupListener: ICleanupListener) {
         this._clientService = clientService;
+        this._cleanupListener = cleanupListener;
     }
 
     public createClient(createClientRequest: CreateClientRequest): Promise<any> {
@@ -38,6 +43,10 @@ export class App implements IApp {
 
     public updateTransaction(merchantIdOrderId: string, status: string): Promise<any> {
         return this.updateTransaction(merchantIdOrderId, status);
+    }
+
+    public listenCleanup(): Promise<void> {
+        return this._cleanupListener.listenCleanup();
     }
     
 

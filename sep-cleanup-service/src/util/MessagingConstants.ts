@@ -1,6 +1,6 @@
 const MessagingConstants = {
   CleanUpExchangeName: 'cleanup',
-  CleanUpRoutingKey: 'start',
+  CleanUpRoutingKey: 'cleanup.start',
   LogExchangeName: 'log',
   LogCreatedRoutingKey: 'log.created',
   LogCreatedQueueName: 'log-log.created',

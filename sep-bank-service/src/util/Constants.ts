@@ -8,7 +8,8 @@ const Constants = {
   IApp: 'IApp',
   IClientService: 'IClientService',
   IWebhookNotifier: 'IWebhookNotifier',
-  ITransactionRepository: 'ITransactionRepository'
+  ITransactionRepository: 'ITransactionRepository',
+  ICleanupListener: 'ICleanupListener'
 };
 
 export default Constants;

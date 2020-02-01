@@ -29,6 +29,8 @@ const start = async (): Promise<void> => {
 
   logger.info('BankService connected on database');
   
+  await app.listenCleanup();
+
   const expressApp: express.Application = express();
   expressApp.use(bodyParser.urlencoded({
     extended: true
