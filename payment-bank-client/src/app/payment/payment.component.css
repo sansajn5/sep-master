@@ -1,0 +1,44 @@
+.card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+}
+
+.card-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 30px;
+    width: 700px;
+    height: 500px;
+    border: 2px solid rgb(17, 120, 189);
+}
+
+.card-label {
+    font-weight: 600;
+}
+
+.card-input-smaller {
+    width: 120px;
+}
+
+.btn-wrapper {
+    text-align: center;
+}
+
+.amount {
+    color: rgb(17, 120, 189);
+}
+
+.btn {
+    color: white;
+    background-color: rgb(17, 120, 189);
+    font-size: 1em;
+    margin: 1em;
+    padding: 0.25em 1em;
+    border: 2px solid rgb(17, 120, 189);
+    border-radius: 3px;
+    width: 150px;
+    height: 50px;
+}

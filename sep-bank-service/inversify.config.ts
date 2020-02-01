@@ -8,8 +8,8 @@ import { DatabaseConnection, ClientRepository, TransactionRepository } from './s
 import { IAMQPMessagingConnection } from './src/messaging';
 import { AMQPConnection } from './src/messaging/impl';
 import ILogNotifer from './src/service/ILogNotifier';
-import { LogNotifier, ClientService, WebhookNotifier } from './src/service/impl';
-import { IClientService, IWebhookNotifier } from './src/service';
+import { LogNotifier, ClientService, WebhookNotifier, CleanupListener } from './src/service/impl';
+import { IClientService, IWebhookNotifier, ICleanupListener } from './src/service';
 import { IApp, App } from './src/App';
 
 const container = new Container();
@@ -23,6 +23,7 @@ container.bind<IAMQPMessagingConnection>(Constants.IAMQPMessagingConnection).to(
 
 container.bind<ILogNotifer>(Constants.ILogNotifer).to(LogNotifier);
 container.bind<IWebhookNotifier>(Constants.IWebhookNotifier).to(WebhookNotifier);
+container.bind<ICleanupListener>(Constants.ICleanupListener).to(CleanupListener);
 container.bind<IClientRepository>(Constants.IClientRepository).to(ClientRepository);
 container.bind<ITransactionRepository>(Constants.ITransactionRepository).to(TransactionRepository);
 container.bind<IClientService>(Constants.IClientService).to(ClientService).inRequestScope();

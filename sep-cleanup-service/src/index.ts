@@ -52,7 +52,7 @@ const start = async (): Promise<void> => {
   
   const port = process.env.CLEANUP_HTTP_PORT || 3000;
   expressApp.listen(port, () => {
-    logger.info(`Logging Service is listening on port ${port}!`);
+    logger.info(`Cleanup Service is listening on port ${port}!`);
   });
 }
 

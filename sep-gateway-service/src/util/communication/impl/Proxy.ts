@@ -48,6 +48,10 @@ export default class Proxy extends BaseProxy implements IProxy {
         requestUrl = requestUrl.replace('client/', '');
         base = `${process.env.SERVICE_CLIENT}`;
       break;
+      case 'bank':
+        requestUrl = requestUrl.replace('bank/', '');
+        base = `${process.env.BANK_CLIENT}`;
+      break;
       default:
         throw new Error('Microservice not found');
     }

@@ -1,0 +1,29 @@
+<div class="card-wrapper" *ngIf="!successFlag">
+    <h2>Pay with credit card</h2>
+    <div class="card-form">
+        <p class="card-label">PAN:</p>
+        <input class="card-input" type="text" [(ngModel)]="pan">
+        <p class="card-label">Security Code:</p>
+        <input class="card-input-smaller" type="text" [(ngModel)]="securityCode">
+        <p class="card-label">Card Holder Name:</p>
+        <input type="text" [(ngModel)]="cardHolderName"> 
+        <div>
+            <p class="card-label">Expiry:</p>
+            <p class="card-label">
+                <input placeholder="Month" class="card-input-smaller" type="text" [(ngModel)]="expiryMonth">
+                 / <input placeholder="Year" class="card-input-smaller" type="text" [(ngModel)]="expiryYear">
+            </p>
+        </div>
+        <br>
+        <div>
+            <h3> Amount: <span class="amount">{{paymentData.amount}}$</span></h3>
+        </div>
+        <br>
+        <div class="btn-wrapper">
+            <button class="btn" (click)="executePayment()">Pay</button>
+        </div>
+    </div>
+</div>
+<div class="card-wrapper" *ngIf="successFlag">
+    <h1>Payment successful!</h1>
+</div>

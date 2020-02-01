@@ -51,9 +51,12 @@ class ClientService implements IClientService {
             transaction.clientId = client.id;
             transaction.merchantIdOrderId = merchantIdOrderId;
             transaction.referenceId = paymentId;
-            transaction.status = 'PROCESSING';
+            transaction.status = 'CREATED';
+            transaction.timestamp = new Date();
 
-            this._transactionRepository.getRepo().save(transaction);
+            await this._transactionRepository.getRepo().save(transaction);
+
+            return Promise.resolve({redirectUrl: redirectUrl});
         } catch (err) {
             console.log(err);
             throw err;

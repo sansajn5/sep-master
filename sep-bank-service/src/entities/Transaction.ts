@@ -19,4 +19,7 @@ export class Transaction {
     // For bank
     @Column()
     public merchantIdOrderId: string;
+
+    @Column()
+    public timestamp: Date;
 }
