@@ -259,6 +259,15 @@ const createAcquirerResponse = async (body) => {
         }
     });
     
+    const account = await accountService.getAccountByClientId(transaction.clientId);
+    account.balance += transaction.amount;
+    account.save((error, res) => {
+        if (error) {
+            result.error = error;
+            return result;
+        }
+    });
+    
     const returnData = {
         merchantOrderId: transaction.merchantOrderId,
         merchantOrderTimeStamp: transaction.merchantOrderTimeStamp,
