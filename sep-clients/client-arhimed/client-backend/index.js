@@ -3,6 +3,11 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const fs = require('fs');
 const https = require('https');
+
+const mongoose = require('mongoose');
+const config = require('./config.json'); 
+const Transaction = require('./Transaction');
+
 // todo use merchent + secret
 const merchantId = '17ec969e-b845-41f7-824a-2a1877406e78';
 const secret = '6e6f8f05-2513-4487-9a3b-e07f9bae2b0a';
@@ -12,6 +17,19 @@ let jwt = null;
 
 const app = express();
 const port = 8080;
+
+mongoose.connect(`mongodb+srv://${config.mongoUser}:${config.mongoPw}@cluster0-yshbv.mongodb.net/scientific-center?retryWrites=true&w=majority`,{
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+})
+.then(() => {
+    console.log('Connected to database!');
+})
+.catch(() => {
+    console.log('Connection failed!');
+})
 
 const httpsAgent = new https.Agent({
     rejectUnauthorized: false,
@@ -30,6 +48,74 @@ app.use(bodyParser.json());
 
 app.get('', (req, res, next) => {
     res.json({message: 'cao'});
+})
+
+app.post('/transaction', async (req, res, next) => {
+    const body = req.body;
+
+    const transaction = new Transaction({
+        productId: body.productId,
+        price: body.price,
+        currency: 'USD',
+        status: 'created',
+        date: new Date().toISOString()
+    });
+    const response = await transaction.save();
+    console.log(response);
+
+    res.json(response);
+})
+
+app.post('/success', async (req, res, next) => {
+    const body = req.body;
+    console.log(body.referenceId)
+
+    const transaction = await Transaction.findById(body.referenceId);
+    console.log(transaction)
+    transaction.status = 'success';
+
+    Transaction.findById(transaction._id, (err, result) => {
+        if (err) {
+            return err;
+        } else {
+            Object.assign(result, transaction);
+            result.save((err, res) => {
+                if (err) {
+                    return err;
+                } else {
+                    return result;
+                }
+            });
+        }
+    })
+
+    res.json({});
+})
+
+app.post('/failed', async (req, res, next) => {
+    const body = req.body;
+    console.log(body.referenceId)
+    
+    const transaction = await Transaction.findById(body.referenceId);
+    console.log(transaction)
+    transaction.status = 'failed';
+
+    Transaction.findById(transaction._id, (err, result) => {
+        if (err) {
+            return err;
+        } else {
+            Object.assign(result, transaction);
+            result.save((err, res) => {
+                if (err) {
+                    return err;
+                } else {
+                    return result;
+                }
+            });
+        }
+    })
+
+    res.json({});
 })
 
 const getToken = async () => {
@@ -57,11 +143,30 @@ app.get('/get-token', async (req, res, next) => {
 
 app.get('/payments', async (req, res, next) => {
     if (jwt == null) {
-        await getToken();
-        await getPayments();
+      // await getToken();
+        //await getPayments();
     }
     res.json({
-        payments: payments
+        payments:  [
+            {
+                "id": "849ef22f-64dc-478c-a2fe-3764e2e3455b",
+                "name": "PAYPAL",
+                "signinUrl": "url123",
+                "paymentUrl": "http://localhost:4201/payment"
+            },
+            {
+                "id": "8fa9887f-4433-4658-97ed-3c537c3c3d58",
+                "name": "BANK",
+                "signinUrl": "url456",
+                "paymentUrl": "url654"
+            },
+            {
+                "id": "74223bea-234f-47ec-b1e3-84b31c9c4dd6",
+                "name": "BITCOIN",
+                "signinUrl": "url789",
+                "paymentUrl": "url987"
+            }
+        ]
     });
 });
 

@@ -1,4 +1,6 @@
-<nz-page-header (nzBack)="onBack()" nzBackIcon nzTitle="Magazine Today Physic" nzSubtitle="This is a super asymmetry"> </nz-page-header>
+<nz-page-header (nzBack)="onBack()" nzBackIcon nzTitle={{magazine}} nzSubtitle="This is a super asymmetry"> </nz-page-header>
+<p style="margin-left: 5rem;color: black;">Amount:<span style="margin-left: .5rem;">{{amount}}</span>USD</p>
+
 <div nz-row class="payment">
     <div class="payment__methods" nz-col nzSpan="12" nzOffset="6">
         <ng-container *ngFor="let payment of payments">
