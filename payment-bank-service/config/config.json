@@ -1,0 +1,7 @@
+{
+    "mongoUsername": "cryptouser123",
+    "mongoPassword": "cryptouser123",
+    "clientAppUrl": "http://localhost:4204/",
+    "pccUrl": "http://localhost:8020",
+    "bankCode": "333"
+}

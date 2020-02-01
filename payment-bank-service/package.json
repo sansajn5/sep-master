@@ -1,0 +1,23 @@
+{
+  "name": "payment-bank-service",
+  "version": "1.0.0",
+  "description": "Service for bank payment",
+  "main": "app.js",
+  "scripts": {
+    "start:server": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "coingate-v2": "^1.0.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.9",
+    "request": "^2.88.0",
+    "save": "^2.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  },
+  "author": "Dejan",
+  "license": "ISC"
+}
