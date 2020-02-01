@@ -33,7 +33,7 @@ class ClientService implements IClientService {
     }
     public async createTransaction(merchantId: string, userId: string, referenceId: string, merchantIdOrderId: string, amount: string): Promise<any> {
         const client = await this._clientRepository.getRepo().findOne({where: {vendorId: merchantId, userId: userId}});
-
+        console.log(client);
         try {
             const { data } = await Axios.post('http://localhost:8010/api/create-payment-request', {
                 merchantId: userId,
@@ -46,7 +46,7 @@ class ClientService implements IClientService {
                 errorUrl: 'http://localhost:8003/api/payments/failed'
             });
             const { redirectUrl, paymentId} = data;
-
+            console.log(data)
             const transaction = new Transaction();
             transaction.clientId = client.id;
             transaction.merchantIdOrderId = merchantIdOrderId;

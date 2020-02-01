@@ -1,3 +1,3 @@
 export default interface IWebhookNotifier {
-    notifyMerchant(merchantId: string, status: 'success' | 'failed', referenceId: string): Promise<void>
+    notifyMerchant(vendorId: string, status: 'success' | 'failed' | 'cancel', referenceId: string): Promise<void>
 }

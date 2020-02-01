@@ -40,7 +40,7 @@ const start = async (): Promise<void> => {
 
   const jwtAuth = expressJwt({
     secret: process.env.JWT_SECRET,
-  }).unless({ path: ['/api/auth/register', '/api/auth/login', '/api/health', '/api/payments/success', '/api/payments/failed'] });
+  }).unless({ path: ['/api/auth/register', '/api/auth/login', '/api/health', '/api/payments','/api/payments/success', '/api/payments/failed'] });
 
   expressApp.use((req, res, next) => {
     if (req.url === '/api/health') return next();

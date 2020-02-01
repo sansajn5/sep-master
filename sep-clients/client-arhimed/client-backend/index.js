@@ -123,18 +123,15 @@ app.post('/failed', async (req, res, next) => {
 
 app.post('/get-bank-url', async (req, res, next) => {
     const body = req.body;
-
-    const result = await new Promise((resolve, reject) => {
-        request.post('localhost:8000/api/bank/payments', body, (err, response) => {
-            if (err) {
-                reject(err);
-            }
-            resolve(response);
-        });
-    })
-    return {
-        url: result.redirectUrl
+    console.log(body.url)
+    if (jwt == null) {
+        await getToken();
     }
+    const {data: {redirectUrl}} = await axios.post(body.url, body, {
+        httpsAgent,
+        headers: {"expecto-patronum" : jwt}
+    });
+    res.status(200).json({redirectUrl})
 
 })
 
@@ -163,31 +160,10 @@ app.get('/get-token', async (req, res, next) => {
 
 app.get('/payments', async (req, res, next) => {
     if (jwt == null) {
-      // await getToken();
-        //await getPayments();
+      await getToken();
+        await getPayments();
     }
-    res.json({
-        payments:  [
-            {
-                "id": "849ef22f-64dc-478c-a2fe-3764e2e3455b",
-                "name": "PAYPAL",
-                "signinUrl": "url123",
-                "paymentUrl": "http://localhost:4201/payment"
-            },
-            {
-                "id": "8fa9887f-4433-4658-97ed-3c537c3c3d58",
-                "name": "BANK",
-                "signinUrl": "url456",
-                "paymentUrl": "url654"
-            },
-            {
-                "id": "74223bea-234f-47ec-b1e3-84b31c9c4dd6",
-                "name": "BITCOIN",
-                "signinUrl": "url789",
-                "paymentUrl": "url987"
-            }
-        ]
-    });
+    res.json({payments});
 });
 
 app.listen(port, () => console.log(`App started successfully! Try it at http://localhost:${port}`));

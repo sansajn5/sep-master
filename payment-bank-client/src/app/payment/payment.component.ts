@@ -55,7 +55,6 @@ export class PaymentComponent implements OnInit {
                     securityCode: this.securityCode
                 }
                 this.paymentService.postPayment(body).subscribe(res => {
-                    console.log(res);
                     this.successFlag = true;
                 }, err => {
                     console.log(err);

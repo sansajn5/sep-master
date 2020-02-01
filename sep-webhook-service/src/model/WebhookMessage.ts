@@ -1,5 +1,5 @@
 export interface WebhookMessage {
     referenceId: string;
-    status: 'success' | 'failed';
-    merchantId: string;
+    status: 'success' | 'failed' | 'cancel';
+    vendorId: string;
 }

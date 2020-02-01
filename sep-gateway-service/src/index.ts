@@ -55,13 +55,17 @@ const start = async (): Promise<void> => {
   expressApp.use(async (req, res, next) => {
     if (req.url === '/health') return next();
     const authHeader = req.header(Constants.SepHeader);
+    console.log(authHeader)
 
     const cacheUser = await cacheService.getValue(`${Constants.SESSION_PREFIX}${authHeader}`);
+    console.log(cacheUser)
     if (!cacheUser && !ANNONYMUS_ROUTES.some(route => req.url === route)) {
+      console.log(111)
       return res.status(401).send();  
     }
 
     if (!['/api/bank/payments/success', '/api/bank/payments/failed'].some(route => req.url === route) && !authHeader) {
+      console.log(112221)
       return res.status(401).send();  
     }
     

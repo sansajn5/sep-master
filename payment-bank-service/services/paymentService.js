@@ -9,14 +9,12 @@ const axios = require('axios');
 const createPaymentRequest = async (body) => {
 
     let result = null;
-
     const query = {
         clientId: body.merchantId,
         clientPassword: body.merchantPassword,
         merchantId: body.organizationId,
     };
     const merchant = await clientService.getClient(query);
-
     if (merchant) {
 
         const transaction = new Transaction({
@@ -109,8 +107,6 @@ const paymentExecute = async (body) => {
             });
         }
 
-        console.log('ENDE')
-        console.log(transaction);
 
         let messageUrl = '';
         let data = {
@@ -142,10 +138,8 @@ const paymentExecute = async (body) => {
      await axios.post(messageUrl, data,
         { headers: {}, params: {} })
         .then(function (response) {
-            console.log(response);
         })
         .catch(function (error) {
-            console.log(error);
         });
 
         result = transaction;
@@ -169,10 +163,8 @@ const redirectToPcc = async (data) => {
     axios.post('http://localhost:8020/api/payment-transfer', data,
        { headers: {}, params: {} })
       .then(function (response) {
-        console.log(response);
       })
       .catch(function (error) {
-        console.log(error);
       });
 }
 
@@ -287,8 +279,6 @@ const createAcquirerResponse = async (body) => {
         status: transaction.status
     }
 
-    console.log('ENDE')
-    console.log(returnData);
 
     let messageUrl = '';
         let data = {
@@ -314,10 +304,8 @@ const createAcquirerResponse = async (body) => {
         await axios.post(messageUrl, data,
             { headers: {}, params: {} })
             .then(function (response) {
-                console.log(response);
             })
             .catch(function (error) {
-                console.log(error);
             });
 
       result = returnData;

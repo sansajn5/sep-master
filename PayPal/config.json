@@ -1,7 +1,0 @@
-{
-    "mongoUser": "milica",
-    "mongoPw": "spJhKeIcrEydGF95",
-    "paypalApi": "https://api.sandbox.paypal.com",
-    "paymentRedirect": "http://localhost:4200/payment/success",
-    "paymentFailedRedirectionURL": "http://localhost:4200/payment/failed"
-}

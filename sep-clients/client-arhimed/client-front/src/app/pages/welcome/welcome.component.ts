@@ -14,7 +14,7 @@ const merchantId = '92aa3e6b-2594-11ea-b565-0242ac150005';
 })
 export class WelcomeComponent implements OnInit {
 
-  private userIsValid: boolean = false;
+  private userIsValid: string;
   private payments = [];
   public amount: string = '50.00';
   public clientId = "92aa3e6b-2594-11ea-b565-0242ac150005"
@@ -32,7 +32,7 @@ export class WelcomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userIsValid = this.route.snapshot.params.id === '1';
+    this.userIsValid = '123';
     this.getPaymentMethods();
   }
 
@@ -58,26 +58,30 @@ export class WelcomeComponent implements OnInit {
       console.log(this.referenceId);
       
       if (payment.name == 'BANK') {
+        console.log(payment.paymentUrl)
         this.dummyService.getUrlForBank({
             "merchantId": this.merchantId,
             "userId": this.userIsValid,
              "merchantIdOrderId": this.referenceId,
-             "amount": this.amount
+             "amount": this.amount,
+             "url": payment.paymentUrl,
         }).subscribe(data => {
-          window.open(data.url + "/" + merchantId + "/" + this.clientId + "/" + this.amount, "_blank");
-
+          console.log(data)
+          const paymentUrl = data.redirectUrl;
+          window.open(paymentUrl , "_blank");
         })
       }
       if (payment.name == 'PAYPAL') {
         // TODO use paymentUrl
+        // http://localhost:4204/payment?transactionId=5e35478324b58830c376c444&amount=50%2F92aa3e6b-2594-11ea-b565-0242ac150005%2F92aa3e6b-2594-11ea-b565-0242ac150005%2F50.00
          window.open(payment.paymentUrl + `?userId=${this.userIsValid}&merchantId=${this.merchantId}&productId=${this.productId}&price=${this.amount}&referenceId=${this.referenceId}`);
        // window.open('http://localhost:4100/payment?customerId=1&sellerId=' + this.clientId +'&vendorId=' + merchantId + '&productId=1&price=' + this.amount)
       }
       if (payment.name == 'BITCOIN') {
        // http://localhost:4200/payment?organizationId=51&customerId=3&merchantId=92aa3e6b-2594-11ea-b565-0242ac150005&productId=5&price_amount=0.003&price_currency=BTC&receive_currency=BTC
-        window.open('http://localhost:4300/payment?organizationId=' + merchantId +'&customerId='+ this.clientId + '&merchantId='+ merchantId +'&productId=5&price_amount=0.003&price_currency=BTC&receive_currency=BTC')
+        window.open('http://localhost:4202/payment?organizationId=' + merchantId +'&customerId='+ this.clientId + '&merchantId='+ merchantId +'&productId=5&price_amount=0.003&price_currency=BTC&receive_currency=BTC')
       }
-      if (payment.name == 'SUBSCRIBE') {
+      if (payment.name == 'PAY_PAL_SUBSCRIBE') {
         window.open(payment.paymentUrl + `?magazine=${this.magazine}&amount=${this.amount}&period=${this.period}&productId=${this.productId}&frequency=${this.frequency}&userId=${this.userIsValid}&merchantId=${this.merchantId}`);
       }
       console.log(payment.paymentUrl);
