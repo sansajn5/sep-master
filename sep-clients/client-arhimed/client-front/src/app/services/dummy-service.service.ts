@@ -20,4 +20,7 @@ export class DummyServiceService {
     return this.http.post('http://localhost:8080/transaction', data);
    }
 
+   public getUrlForBank(data: any): Observable<any> {
+    return this.http.post('http://localhost:8080/get-bank-url', data);
+   }
 }

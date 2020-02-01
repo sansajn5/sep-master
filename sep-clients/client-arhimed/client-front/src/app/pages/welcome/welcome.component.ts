@@ -58,7 +58,15 @@ export class WelcomeComponent implements OnInit {
       console.log(this.referenceId);
       
       if (payment.name == 'BANK') {
-        window.open(payment.paymentUrl + "/" + merchantId + "/" + this.clientId + "/" + this.amount, "_blank");
+        this.dummyService.getUrlForBank({
+            "merchantId": this.merchantId,
+            "userId": this.userIsValid,
+             "merchantIdOrderId": this.referenceId,
+             "amount": this.amount
+        }).subscribe(data => {
+          window.open(data.url + "/" + merchantId + "/" + this.clientId + "/" + this.amount, "_blank");
+
+        })
       }
       if (payment.name == 'PAYPAL') {
         // TODO use paymentUrl

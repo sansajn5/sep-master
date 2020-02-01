@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const fs = require('fs');
 const https = require('https');
+const request = require('request');
+
 
 const mongoose = require('mongoose');
 const config = require('./config.json'); 
@@ -116,6 +118,24 @@ app.post('/failed', async (req, res, next) => {
     })
 
     res.json({});
+})
+
+
+app.post('/get-bank-url', async (req, res, next) => {
+    const body = req.body;
+
+    const result = await new Promise((resolve, reject) => {
+        request.post('localhost:8000/api/bank/payments', body, (err, response) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(response);
+        });
+    })
+    return {
+        url: result.redirectUrl
+    }
+
 })
 
 const getToken = async () => {
